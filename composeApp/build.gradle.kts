@@ -34,6 +34,7 @@ kotlin {
             implementation(libs.androidx.webkit)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
             implementation(libs.hilt.android)
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.analytics)
@@ -56,6 +57,9 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(libs.kotlinx.serialization.json)
         }
         iosMain.dependencies {
@@ -64,22 +68,23 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.ktor.client.mock)
+            implementation(libs.koin.test)
             implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
 
 android {
-    namespace = "com.abplua.qiitare"
+    namespace = "com.abplua.qiitaly"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.abplus.qiitare"
+        applicationId = "com.abplus.qiitaly"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 7
         versionName = "1.0.0"
-        manifestPlaceholders["oidcRedirectScheme"] = "qiitare"
+        manifestPlaceholders["oidcRedirectScheme"] = "qiitaly"
     }
     packaging {
         resources {
