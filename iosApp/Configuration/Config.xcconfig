@@ -1,5 +1,7 @@
 TEAM_ID=
 
+#include "OAuthSecrets.xcconfig"
+
 PRODUCT_NAME=Qiitaly2
 PRODUCT_BUNDLE_IDENTIFIER=com.abplua.qiitaly.Qiitaly2$(TEAM_ID)
 

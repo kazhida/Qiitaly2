@@ -18,12 +18,23 @@ import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.yield
 import kotlinx.serialization.json.Json
 import org.publicvalue.multiplatform.oidc.flows.AuthCodeResult
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class AuthRepositoryTest {
+
+    init {
+        setUp()
+    }
+
+    @BeforeTest
+    fun setUp() {
+        OAuthConfig.clientId = "test-client-id"
+        OAuthConfig.clientSecret = "test-client-secret"
+    }
 
     @Test
     fun oauthAuthorize_returnsQiitaAuthorizeUrl() {
@@ -114,7 +125,7 @@ class AuthRepositoryTest {
     }
 
     @Test
-    fun authenticateAsync_returnsFailedWhenQiitalyjectsAccessTokenRequest() = runTest {
+    fun authenticateAsync_returnsFailedWhenQiitaRejectsAccessTokenRequest() = runTest {
         val repository = AuthRepository(
             httpClient = testHttpClient(
                 MockEngine {

@@ -1,4 +1,18 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+
+val oauthProperties = Properties().apply {
+    val file = rootProject.file("oauth.properties")
+    if (file.exists()) {
+        file.inputStream().use(::load)
+    }
+}
+
+fun oauthProperty(name: String): String =
+    oauthProperties.getProperty(name, "")
+
+fun String.asBuildConfigString(): String =
+    "\"${replace("\\", "\\\\").replace("\"", "\\\"")}\""
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -85,6 +99,11 @@ android {
         versionCode = 7
         versionName = "1.0.0"
         manifestPlaceholders["oidcRedirectScheme"] = "qiitaly"
+        buildConfigField("String", "QIITA_CLIENT_ID", oauthProperty("QIITA_CLIENT_ID").asBuildConfigString())
+        buildConfigField("String", "QIITA_CLIENT_SECRET", oauthProperty("QIITA_CLIENT_SECRET").asBuildConfigString())
+    }
+    buildFeatures {
+        buildConfig = true
     }
     packaging {
         resources {

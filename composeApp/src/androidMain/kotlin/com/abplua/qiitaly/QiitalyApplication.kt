@@ -11,6 +11,9 @@ class QiitalyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        OAuthConfig.clientId = BuildConfig.QIITA_CLIENT_ID
+        OAuthConfig.clientSecret = BuildConfig.QIITA_CLIENT_SECRET
+
         initKoin {
             androidContext(this@QiitalyApplication)
             androidLogger()

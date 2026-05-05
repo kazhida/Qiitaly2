@@ -61,7 +61,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getItems_throwsWhenQiitalyturnsError() = runTest {
+    fun getItems_throwsWhenQiitaReturnsError() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -85,7 +85,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getItems_throwsInvalidAccessTokenWhenQiitalyturnsForbidden() = runTest {
+    fun getItems_throwsInvalidAccessTokenWhenQiitaReturnsForbidden() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -149,7 +149,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getAuthenticatedUser_throwsInvalidAccessTokenWhenQiitalyturnsUnauthorized() = runTest {
+    fun getAuthenticatedUser_throwsInvalidAccessTokenWhenQiitaReturnsUnauthorized() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -173,7 +173,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getAuthenticatedUser_throwsInvalidAccessTokenWhenQiitalyturnsForbidden() = runTest {
+    fun getAuthenticatedUser_throwsInvalidAccessTokenWhenQiitaReturnsForbidden() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -197,7 +197,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getAuthenticatedUser_throwsWhenQiitalyturnsNonUnauthorizedError() = runTest {
+    fun getAuthenticatedUser_throwsWhenQiitaReturnsNonUnauthorizedError() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -255,7 +255,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getFollowees_throwsWhenQiitalyturnsError() = runTest {
+    fun getFollowees_throwsWhenQiitaReturnsError() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
@@ -319,7 +319,7 @@ class QiitaRepositoryTest {
     }
 
     @Test
-    fun getFollowingTags_throwsWhenQiitalyturnsError() = runTest {
+    fun getFollowingTags_throwsWhenQiitaReturnsError() = runTest {
         val repository = QiitaRepository(
             httpClient = testHttpClient(
                 MockEngine {
