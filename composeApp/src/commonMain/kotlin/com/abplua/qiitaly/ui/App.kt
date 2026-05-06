@@ -1,4 +1,4 @@
-package com.abplua.qiitaly
+package com.abplua.qiitaly.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -14,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.abplua.qiitaly.Greeting
+import com.abplua.qiitaly.OAuthRedirectState
 import org.jetbrains.compose.resources.painterResource
 
 import qiitaly2.composeapp.generated.resources.Res
@@ -24,6 +26,7 @@ import qiitaly2.composeapp.generated.resources.compose_multiplatform
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        val latestOAuthPayload by OAuthRedirectState.payload.collectAsState()
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -33,6 +36,10 @@ fun App() {
         ) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
+            }
+            latestOAuthPayload?.let { payload ->
+                Text("OAuth code: ${payload.code ?: "(missing)"}")
+                Text("OAuth state: ${payload.state ?: "(missing)"}")
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
