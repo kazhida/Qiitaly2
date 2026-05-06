@@ -5,8 +5,6 @@
 xcuserdata
 !src/**/build/
 local.properties
-oauth.properties
-iosApp/Configuration/OAuthSecrets.xcconfig
 .idea
 .DS_Store
 captures
@@ -19,7 +17,3 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
-google-services.json
-GoogleService-Info.plist
-
-composeApp/release/*

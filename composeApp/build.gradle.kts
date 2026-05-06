@@ -1,28 +1,11 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
-
-val oauthProperties = Properties().apply {
-    val file = rootProject.file("oauth.properties")
-    if (file.exists()) {
-        file.inputStream().use(::load)
-    }
-}
-
-fun oauthProperty(name: String): String =
-    oauthProperties.getProperty(name, "")
-
-fun String.asBuildConfigString(): String =
-    "\"${replace("\\", "\\\\").replace("\"", "\\\"")}\""
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.kotlinKapt)
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.googleServices)
 }
 
 kotlin {
@@ -41,49 +24,24 @@ kotlin {
             isStatic = true
         }
     }
+
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.webkit)
-            implementation(libs.androidx.navigation.compose)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.koin.android)
-            implementation(libs.hilt.android)
-            implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
-            implementation(libs.compose.material.icons.extended)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network.ktor3)
-            implementation(libs.oidc.appsupport)
-            implementation(libs.oidc.ktor)
-            implementation(libs.oidc.preferences)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            implementation(libs.kotlinx.serialization.json)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(libs.ktor.client.mock)
-            implementation(libs.koin.test)
-            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
@@ -93,17 +51,11 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.abplus.qiitaly"
+        applicationId = "com.abplua.qiitaly"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 7
-        versionName = "1.0.0"
-        manifestPlaceholders["oidcRedirectScheme"] = "qiitaly"
-        buildConfigField("String", "QIITA_CLIENT_ID", oauthProperty("QIITA_CLIENT_ID").asBuildConfigString())
-        buildConfigField("String", "QIITA_CLIENT_SECRET", oauthProperty("QIITA_CLIENT_SECRET").asBuildConfigString())
-    }
-    buildFeatures {
-        buildConfig = true
+        versionCode = 1
+        versionName = "1.0"
     }
     packaging {
         resources {
@@ -123,5 +75,5 @@ android {
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
-    add("kapt", libs.hilt.compiler)
 }
+
